@@ -1,4 +1,5 @@
 require_relative('person.rb')
+require_relative('bus_stop.rb')
 
 class Bus
 
@@ -28,6 +29,13 @@ class Bus
 
   def empty
     @passengers = []
+  end
+
+  def pick_up_all(bus_stop)
+    for person in bus_stop.queue
+      pick_up(person)
+    end
+    bus_stop.clear_queue
   end
 
 end

@@ -8,6 +8,7 @@ class TestBus < MiniTest::Test
     @bus = Bus.new(22, "Ocean Terminal")
     @robbie = Person.new("Robbie", 25)
     @tahnee = Person.new("Tahnee", 32)
+    @waverley = BusStop.new("Waverley")
   end
 
   def test_check_route_number
@@ -49,6 +50,15 @@ class TestBus < MiniTest::Test
 
     @bus.empty
     assert_equal(0, @bus.passenger_count)
+  end
+
+  def test_pick_up_all_from_stop
+    @waverley.add_to_queue(@robbie)
+    @waverley.add_to_queue(@tahnee)
+    @bus.pick_up_all(@waverley)
+
+    assert_equal(2, @bus.passenger_count)
+    assert_equal(0, @waverley.queue_count)
   end
 
 
